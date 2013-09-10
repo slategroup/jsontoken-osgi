@@ -17,11 +17,6 @@ xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/ma
       <distribution>repo</distribution>
     </license>
   </licenses>
-  <parent>
-    <groupId>org.sonatype.oss</groupId>
-    <artifactId>oss-parent</artifactId>
-    <version>7</version>
-  </parent>
   <scm>
     <url>https://github.com/slategroup/jsontoken-osgi</url>
     <connection>scm:git:git://github.com/slategroup/jsontoken-osgi.git</connection>
