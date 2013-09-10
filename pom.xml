@@ -1,10 +1,13 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.googlecode.jsontoken</groupId>
-  <artifactId>jsontoken</artifactId>
-  <version>1.1-SNAPSHOT</version>
-  <packaging>jar</packaging>
-  <name>jsontoken</name>
+  <artifactId>jsontoken-osgi</artifactId>
+  <version>1.0-SNAPSHOT</version>
+  <packaging>bundle</packaging>
+  <name>jsontoken-osgi</name>
   <description>JWT implementation</description>
   <url>http://code.google.com/p/jsontoken/</url>
   <licenses>
@@ -14,18 +17,18 @@
       <distribution>repo</distribution>
     </license>
   </licenses>
-
   <parent>
     <groupId>org.sonatype.oss</groupId>
     <artifactId>oss-parent</artifactId>
     <version>7</version>
   </parent>
   <scm>
-    <connection>scm:svn:http://jsontoken.googlecode.com/svn/trunk/</connection>
-    <developerConnection>scm:svn:https://jsontoken.googlecode.com/svn/trunk/</developerConnection>
+    <connection>
+    scm:svn:http://jsontoken.googlecode.com/svn/trunk/</connection>
+    <developerConnection>
+    scm:svn:https://jsontoken.googlecode.com/svn/trunk/</developerConnection>
     <url>http://jsontoken.googlecode.com/svn/trunk/</url>
   </scm>
-
   <developers>
     <developer>
       <id>jcai</id>
@@ -33,35 +36,57 @@
       <email>sonicgg@gmail.com</email>
     </developer>
   </developers>
-
   <properties>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <project.build.sourceEncoding>
+    UTF-8</project.build.sourceEncoding>
   </properties>
-
   <build>
-  	<plugins>
-  		<plugin>
-  			<groupId>org.apache.maven.plugins</groupId>
-  			<artifactId>maven-compiler-plugin</artifactId>
-  			<version>2.3.1</version>
-  			<configuration>
-  			  <source>1.6</source>
-  			  <target>1.6</target>
-  			</configuration>
-  		</plugin>
-                <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-source-plugin</artifactId>
-                        <executions>
-                          <execution>
-                            <id>attach-sources</id>
-                            <goals>
-                              <goal>jar</goal>
-                            </goals>
-                          </execution>
-                        </executions>
-                </plugin>
-  	</plugins>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>2.3.1</version>
+        <configuration>
+          <source>1.6</source>
+          <target>1.6</target>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-source-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>attach-sources</id>
+            <goals>
+              <goal>jar</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.felix</groupId>
+        <artifactId>maven-bundle-plugin</artifactId>
+        <extensions>true</extensions>
+        <configuration>
+          <instructions>
+            <Export-Package>net.oauth.jsontoken,
+            net.oauth.jsontoken.crypto,
+            net.oauth.jsontoken.discovery,
+            net.oauth.signatures</Export-Package>
+            <Import-Package>com.google.common.base;version=0.0.0,
+            com.google.common.collect;version=0.0.0,
+            com.google.gson;version=0.0.0,
+            com.google.gson.annotations;version=0.0.0,
+            javax.crypto,javax.crypto.spec;version=0.0.0,
+            javax.servlet.http;version=0.0.0,
+            org.apache.commons.codec.binary;version=0.0.0,
+            org.apache.http;version=0.0.0,
+            org.apache.http.message;version=0.0.0,
+            org.joda.time;version=0.0.0</Import-Package>
+          </instructions>
+        </configuration>
+      </plugin>
+    </plugins>
   </build>
   <dependencies>
     <dependency>
@@ -71,46 +96,46 @@
       <scope>test</scope>
     </dependency>
     <dependency>
-    	<groupId>com.google.code.gson</groupId>
-    	<artifactId>gson</artifactId>
-    	<version>1.4</version>
-    	<type>jar</type>
-    	<scope>compile</scope>
+      <groupId>com.google.code.gson</groupId>
+      <artifactId>gson</artifactId>
+      <version>2.2.4</version>
+      <type>jar</type>
+      <scope>compile</scope>
     </dependency>
     <dependency>
-    	<groupId>commons-codec</groupId>
-    	<artifactId>commons-codec</artifactId>
-    	<version>1.4</version>
-    	<type>jar</type>
-    	<scope>compile</scope>
+      <groupId>commons-codec</groupId>
+      <artifactId>commons-codec</artifactId>
+      <version>1.4</version>
+      <type>jar</type>
+      <scope>compile</scope>
     </dependency>
     <dependency>
-    	<groupId>com.google.collections</groupId>
-    	<artifactId>google-collections</artifactId>
-    	<version>1.0</version>
-    	<type>jar</type>
-    	<scope>compile</scope>
+      <groupId>com.google.guava</groupId>
+      <artifactId>guava</artifactId>
+      <version>14.0.1</version>
+      <type>jar</type>
+      <scope>compile</scope>
     </dependency>
     <dependency>
-    	<groupId>joda-time</groupId>
-    	<artifactId>joda-time</artifactId>
-    	<version>1.6</version>
-    	<type>jar</type>
-    	<scope>compile</scope>
+      <groupId>joda-time</groupId>
+      <artifactId>joda-time</artifactId>
+      <version>2.2</version>
+      <type>jar</type>
+      <scope>compile</scope>
     </dependency>
     <dependency>
-    	<groupId>javax.servlet</groupId>
-    	<artifactId>servlet-api</artifactId>
-    	<version>2.5</version>
-    	<type>jar</type>
-    	<scope>compile</scope>
+      <groupId>javax.servlet</groupId>
+      <artifactId>servlet-api</artifactId>
+      <version>2.5</version>
+      <type>jar</type>
+      <scope>compile</scope>
     </dependency>
     <dependency>
-    	<groupId>org.apache.httpcomponents</groupId>
-    	<artifactId>httpcore</artifactId>
-    	<version>4.0.1</version>
-    	<type>jar</type>
-    	<scope>compile</scope>
+      <groupId>org.apache.httpcomponents</groupId>
+      <artifactId>httpcore</artifactId>
+      <version>4.0.1</version>
+      <type>jar</type>
+      <scope>compile</scope>
     </dependency>
   </dependencies>
 </project>
